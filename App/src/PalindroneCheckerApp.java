@@ -1,4 +1,6 @@
 import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class PalindroneCheckerApp {
 
@@ -7,26 +9,35 @@ public class PalindroneCheckerApp {
         // Step 1: Original string
         String word = "madam";
 
-        // Step 2: Create stack
+        // Step 2: Create Stack and Queue
         Stack<Character> stack = new Stack<>();
+        Queue<Character> queue = new LinkedList<>();
 
-        // Step 3: Push characters into stack
+        // Step 3: Insert characters into both
         for(int i = 0; i < word.length(); i++) {
-            stack.push(word.charAt(i));
+            char ch = word.charAt(i);
+            stack.push(ch);      // LIFO
+            queue.add(ch);       // FIFO
         }
 
-        // Step 4: Pop and build reversed string
-        String reversed = "";
+        // Step 4: Compare dequeue and pop
+        boolean isPalindrome = true;
 
-        while(!stack.isEmpty()) {
-            reversed = reversed + stack.pop();
+        for(int i = 0; i < word.length(); i++) {
+
+            char fromQueue = queue.remove(); // FIFO
+            char fromStack = stack.pop();    // LIFO
+
+            if(fromQueue != fromStack) {
+                isPalindrome = false;
+                break;
+            }
         }
 
-        // Step 5: Compare original and reversed
-        if(word.equals(reversed)) {
+        // Step 5: Display result
+        if(isPalindrome) {
             System.out.println("The string \"" + word + "\" is a PALINDROME.");
-        }
-        else {
+        } else {
             System.out.println("The string \"" + word + "\" is NOT a palindrome.");
         }
     }
