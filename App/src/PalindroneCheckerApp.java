@@ -1,25 +1,33 @@
+import java.util.Stack;
 
 public class PalindroneCheckerApp {
 
     public static void main(String[] args) {
 
-        // Step 1: Original String
-        String original = "level";
+        // Step 1: Original string
+        String word = "madam";
 
-        // Step 2: Empty string to store reverse
+        // Step 2: Create stack
+        Stack<Character> stack = new Stack<>();
+
+        // Step 3: Push characters into stack
+        for(int i = 0; i < word.length(); i++) {
+            stack.push(word.charAt(i));
+        }
+
+        // Step 4: Pop and build reversed string
         String reversed = "";
 
-        // Step 3: Reverse using for loop
-        for(int i = original.length() - 1; i >= 0; i--) {
-            reversed = reversed + original.charAt(i);
+        while(!stack.isEmpty()) {
+            reversed = reversed + stack.pop();
         }
 
-        // Step 4: Compare strings
-        if(original.equals(reversed)) {
-            System.out.println("The string \"" + original + "\" is a PALINDROME.");
+        // Step 5: Compare original and reversed
+        if(word.equals(reversed)) {
+            System.out.println("The string \"" + word + "\" is a PALINDROME.");
         }
         else {
-            System.out.println("The string \"" + original + "\" is NOT a palindrome.");
+            System.out.println("The string \"" + word + "\" is NOT a palindrome.");
         }
     }
 }
