@@ -1,40 +1,36 @@
-import java.util.Stack;
-import java.util.Queue;
-import java.util.LinkedList;
+import java.util.Deque;
+import java.util.ArrayDeque;
 
 public class PalindroneCheckerApp {
 
     public static void main(String[] args) {
 
-        // Step 1: Original string
-        String word = "madam";
+        // Step 1: Input string
+        String word = "racecar";
 
-        // Step 2: Create Stack and Queue
-        Stack<Character> stack = new Stack<>();
-        Queue<Character> queue = new LinkedList<>();
+        // Step 2: Create deque
+        Deque<Character> deque = new ArrayDeque<>();
 
-        // Step 3: Insert characters into both
+        // Step 3: Insert characters
         for(int i = 0; i < word.length(); i++) {
-            char ch = word.charAt(i);
-            stack.push(ch);      // LIFO
-            queue.add(ch);       // FIFO
+            deque.addLast(word.charAt(i));
         }
 
-        // Step 4: Compare dequeue and pop
+        // Step 4: Compare front and rear
         boolean isPalindrome = true;
 
-        for(int i = 0; i < word.length(); i++) {
+        while(deque.size() > 1) {
 
-            char fromQueue = queue.remove(); // FIFO
-            char fromStack = stack.pop();    // LIFO
+            char front = deque.removeFirst();
+            char rear = deque.removeLast();
 
-            if(fromQueue != fromStack) {
+            if(front != rear) {
                 isPalindrome = false;
                 break;
             }
         }
 
-        // Step 5: Display result
+        // Step 5: Print result
         if(isPalindrome) {
             System.out.println("The string \"" + word + "\" is a PALINDROME.");
         } else {
